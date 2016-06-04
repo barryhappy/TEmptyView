@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TEmptyVIewDemo.iml" filepath="$PROJECT_DIR$/TEmptyVIewDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/app.iml" filepath="$PROJECT_DIR$/demo/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/temptyview_lib/temptyview_lib.iml" filepath="$PROJECT_DIR$/temptyview_lib/temptyview_lib.iml" />
+    </modules>
+  </component>
+</project>
