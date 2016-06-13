@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:id="@+id/layoutEmpty"
               xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_gravity="center"
@@ -10,16 +11,16 @@
         android:id="@+id/t_emptyImageIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/bike"
         />
 
     <TextView
         android:id="@+id/t_emptyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="default empty text"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:text="No Data"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/t_emptyButton"
@@ -28,6 +29,7 @@
         android:text="Your custom button"
         android:layout_marginTop="10dp"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_gravity="center_horizontal"/>
 
 

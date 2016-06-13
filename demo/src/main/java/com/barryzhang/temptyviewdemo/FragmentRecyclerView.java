@@ -1,22 +1,13 @@
 package com.barryzhang.temptyviewdemo;
 
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.barryzhang.temptyview.TViewUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FragmentRecyclerView extends BaseFragment {
     RecyclerView recyclerView ;
@@ -53,6 +44,7 @@ public class FragmentRecyclerView extends BaseFragment {
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
+        testData.clear();
         for(int i = 0 ; i < 20 ; i ++){
             testData.add("Recycler View test data, Item: " + i);
         }
@@ -64,7 +56,7 @@ public class FragmentRecyclerView extends BaseFragment {
                 .setEmptyTextColor(Color.GRAY)
                 .setEmptyText("This is a empty view in fragment 5 \n RecyclerView")
                 .setIconSrc(R.drawable.ic_menu_camera)
-                .bindListView(recyclerView);
+                .bindView(recyclerView);
 
     }
 

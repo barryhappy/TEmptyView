@@ -13,7 +13,6 @@ import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 /**
@@ -52,7 +51,7 @@ public class TViewUtil {
     }
 
     public static void setEmptyView(AdapterView listView, EmptyViewBuilder builder){
-        builder.bindListView(listView);
+        builder.bindView(listView);
     }
 
 
@@ -75,36 +74,41 @@ public class TViewUtil {
             return new EmptyViewBuilder(context);
         }
 
-        public void bindListView(final View listView){
+        public void bindView(final AdapterView listView){
             final TSimpleEmptyView emptyView = genSimpleEmptyView(listView);
+            removeExistEmptyView(listView);
+            listView.setEmptyView(emptyView);
+            setEmptyViewStyle(emptyView);
+        }
 
-            if(listView instanceof AdapterView) {
-                removeExistEmptyView((AdapterView) listView);
-                ((AdapterView) listView).setEmptyView(emptyView);
-            }else if(listView instanceof RecyclerView){
-                final RecyclerView.Adapter adapter = ((RecyclerView) listView).getAdapter();
-                if(adapter != null) {
-                    RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
-                        @Override
-                        public void onChanged() {
-                            super.onChanged();
-                            if (adapter.getItemCount() > 0) {
-                                listView.setVisibility(View.VISIBLE);
-                                emptyView.setVisibility(View.GONE);
-                            } else {
-                                listView.setVisibility(View.GONE);
-                                emptyView.setVisibility(View.VISIBLE);
-                            }
+        public void bindView(final RecyclerView recyclerView){
+
+            final TSimpleEmptyView emptyView = genSimpleEmptyView(recyclerView);
+            final RecyclerView.Adapter adapter =  recyclerView.getAdapter();
+            if(adapter != null) {
+                RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
+                    @Override
+                    public void onChanged() {
+                        super.onChanged();
+                        if (adapter.getItemCount() > 0) {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            emptyView.setVisibility(View.GONE);
+                        } else {
+                            recyclerView.setVisibility(View.GONE);
+                            emptyView.setVisibility(View.VISIBLE);
                         }
-                    };
-                    adapter.registerAdapterDataObserver(observer);
-                    observer.onChanged();
-                }else{
-                    throw new RuntimeException("This RecyclerView has no adapter, you must call setAdapter first!");
-                }
+                    }
+                };
+                adapter.registerAdapterDataObserver(observer);
+                observer.onChanged();
+            }else{
+                throw new RuntimeException("This RecyclerView has no adapter, you must call setAdapter first!");
             }
+            setEmptyViewStyle(emptyView);
 
+        }
 
+        private void setEmptyViewStyle(TSimpleEmptyView emptyView) {
             if(emptyTextColor != -1) {
                 emptyView.setTextColor(emptyTextColor);
             }
@@ -132,14 +136,19 @@ public class TViewUtil {
             if(mAction != null){
                 emptyView.setAction(mAction);
             }
-
         }
+
         private EmptyViewBuilder(Context context) {
             this.mContext = context;
         }
 
         public EmptyViewBuilder setEmptyText(String text){
             this.emptyText = text;
+            return this;
+        }
+
+        public EmptyViewBuilder setEmptyText(int textResID){
+            this.emptyText = mContext.getString(textResID);
             return this;
         }
 
