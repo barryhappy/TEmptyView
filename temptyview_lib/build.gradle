@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'TEmptyView'
+
+    publishedGroupId = 'com.barryzhang'
+    libraryName = 'TEmptyVIew'
+    artifact = 'temptyview_lib'
+
+    libraryDescription = 'Just a Wheel——A easy way to setEmptyView to ListView、GridView or RecyclerView etc..'
+
+    siteUrl = 'https://github.com/barryhappy/TEmptyView'
+    gitUrl = 'https://github.com/barryhappy/TEmptyView.git'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'barryhappy'
+    developerName = 'Barry Zhang'
+    developerEmail = 'barryhappy2010@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "24.0.0 rc3"
@@ -24,3 +48,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
