@@ -60,7 +60,6 @@ public class FragmentListView extends BaseFragment {
             TViewUtil.EmptyViewBuilder.getInstance(getContext())
                     .setEmptyTextSize(12)
                     .setEmptyTextColor(Color.RED)
-                    .setEmptyText("No data /(ㄒoㄒ)/")
                     .setIconSrc(R.drawable.ic_menu_share)
                     //or
                     .bindView(listView);
@@ -69,8 +68,6 @@ public class FragmentListView extends BaseFragment {
 
             TViewUtil.EmptyViewBuilder.getInstance(getContext())
                     .setEmptyTextSize(14)
-                    .setEmptyTextColor(Color.GRAY)
-                    .setEmptyText("No data")
                     .setIconDrawable(getResources().getDrawable(R.drawable.airplane))
                     .bindView(listView);
         }else if(type == 3){

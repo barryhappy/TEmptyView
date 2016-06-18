@@ -21,13 +21,17 @@ import android.widget.RelativeLayout;
 public class TViewUtil {
 
     public static void setEmptyView(AdapterView listView){
-        TSimpleEmptyView view = genSimpleEmptyView(listView);
-        listView.setEmptyView(view);
+        if(TEmptyView.hasDefaultConfig()){
+            TEmptyView.getConfig().bindView(listView);
+        }else {
+            TEmptyView view = genSimpleEmptyView(listView);
+            listView.setEmptyView(view);
+        }
     }
 
     @NonNull
-    private static TSimpleEmptyView genSimpleEmptyView(View view) {
-        TSimpleEmptyView emptyView  = new TSimpleEmptyView(view.getContext(),null);
+    private static TEmptyView genSimpleEmptyView(View view) {
+        TEmptyView emptyView  = new TEmptyView(view.getContext(),null);
         ViewParent parent = view.getParent();
         if(parent instanceof ViewGroup){
             ((ViewGroup) parent).addView(emptyView);
@@ -63,11 +67,15 @@ public class TViewUtil {
         private Drawable iconDrawable;
         private int emptyTextColor = -1;
         private int emptyTextSize;
-        private boolean mShowIcon = true;
-        private boolean mShowText = true;
-        private boolean mShowButton = false;
+        private ShowType mShowIcon = ShowType.DEFAULT;
+        private ShowType mShowText = ShowType.DEFAULT;
+        private ShowType mShowButton = ShowType.DEFAULT;
         private View.OnClickListener mAction;
         private String actionText;
+
+        private enum ShowType{
+            DEFAULT,SHOW,HIDE
+        }
 
 
         public static EmptyViewBuilder getInstance(Context context){
@@ -75,7 +83,7 @@ public class TViewUtil {
         }
 
         public void bindView(final AdapterView listView){
-            final TSimpleEmptyView emptyView = genSimpleEmptyView(listView);
+            final TEmptyView emptyView = genSimpleEmptyView(listView);
             removeExistEmptyView(listView);
             listView.setEmptyView(emptyView);
             setEmptyViewStyle(emptyView);
@@ -83,7 +91,7 @@ public class TViewUtil {
 
         public void bindView(final RecyclerView recyclerView){
 
-            final TSimpleEmptyView emptyView = genSimpleEmptyView(recyclerView);
+            final TEmptyView emptyView = genSimpleEmptyView(recyclerView);
             final RecyclerView.Adapter adapter =  recyclerView.getAdapter();
             if(adapter != null) {
                 RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
@@ -108,33 +116,76 @@ public class TViewUtil {
 
         }
 
-        private void setEmptyViewStyle(TSimpleEmptyView emptyView) {
-            if(emptyTextColor != -1) {
-                emptyView.setTextColor(emptyTextColor);
+        private void setEmptyViewStyle(TEmptyView emptyView) {
+
+            boolean canShowText =  (mShowText == ShowType.SHOW ||
+                        (mShowText == ShowType.DEFAULT &&
+                            TEmptyView.hasDefaultConfig() &&
+                            TEmptyView.getConfig().mShowText == ShowType.SHOW));
+            emptyView.setShowText(canShowText);
+            if(canShowText) {
+                if (emptyTextColor != -1) {
+                    emptyView.setTextColor(emptyTextColor);
+                } else if (TEmptyView.hasDefaultConfig() && TEmptyView.getConfig().emptyTextColor != -1) {
+                    emptyView.setTextColor(TEmptyView.getConfig().emptyTextColor);
+                }
+
+                if (emptyTextSize != 0) {
+                    emptyView.setTextSize(emptyTextSize);
+                } else if (TEmptyView.hasDefaultConfig() && TEmptyView.getConfig().emptyTextSize != 0) {
+                    emptyView.setTextSize(TEmptyView.getConfig().emptyTextSize);
+                }
+
+                if (!TextUtils.isEmpty(emptyText)) {
+                    emptyView.setEmptyText(emptyText);
+                } else if (TEmptyView.hasDefaultConfig() && !TextUtils.isEmpty(TEmptyView.getConfig().emptyText)) {
+                    emptyView.setEmptyText(TEmptyView.getConfig().emptyText);
+                }
             }
-            if(emptyTextSize != 0) {
-                emptyView.setTextSize(emptyTextSize);
+
+            boolean canShowIcon = (mShowIcon == ShowType.SHOW ||
+                    (mShowIcon == ShowType.DEFAULT &&
+                            TEmptyView.hasDefaultConfig() &&
+                            TEmptyView.getConfig().mShowIcon == ShowType.SHOW));
+            emptyView.setShowIcon(canShowIcon);
+            if(canShowIcon) {
+                if (iconSrc != 0) {
+                    emptyView.setIcon(iconSrc);
+                } else if (TEmptyView.hasDefaultConfig() && TEmptyView.getConfig().iconSrc != 0 ) {
+                    emptyView.setIcon(TEmptyView.getConfig().iconSrc);
+                }
+
+                if (iconDrawable != null) {
+                    emptyView.setIcon(iconDrawable);
+                } else if (TEmptyView.hasDefaultConfig() && TEmptyView.getConfig().iconDrawable != null) {
+                    emptyView.setIcon(TEmptyView.getConfig().iconDrawable);
+                }
             }
-            if(!TextUtils.isEmpty(emptyText)){
-                emptyView.setEmptyText(emptyText);
+
+            boolean canShowButton = (mShowButton == ShowType.SHOW ||
+                    (mShowButton == ShowType.DEFAULT &&
+                            TEmptyView.hasDefaultConfig() &&
+                            TEmptyView.getConfig().mShowButton == ShowType.SHOW));
+            emptyView.setShowButton(canShowButton);
+            if(canShowButton) {
+                if (!TextUtils.isEmpty(actionText)) {
+                    emptyView.setActionText(actionText);
+                }else if (TEmptyView.hasDefaultConfig() && !TextUtils.isEmpty(TEmptyView.getConfig().actionText)) {
+                    emptyView.setActionText(TEmptyView.getConfig().actionText);
+                }
+
+                if (mAction != null) {
+                    emptyView.setAction(mAction);
+                }else if (TEmptyView.hasDefaultConfig() &&  TEmptyView.getConfig().mAction != null) {
+                    emptyView.setAction(TEmptyView.getConfig().mAction);
+                }
             }
-            emptyView.setShowButton(mShowButton);
-            emptyView.setShowText(mShowText);
-            emptyView.setShowIcon(mShowIcon);
-            if(iconSrc != 0) {
-                emptyView.setIcon(iconSrc);
-            }
-            if(iconDrawable != null){
-                emptyView.setIcon(iconDrawable);
-            }
+
+            //TODO 测试
             if(layoutParams != null){
                 emptyView.setLayoutParams(layoutParams);
-            }
-            if(!TextUtils.isEmpty(actionText)) {
-                emptyView.setActionText(actionText);
-            }
-            if(mAction != null){
-                emptyView.setAction(mAction);
+            }else if (TEmptyView.hasDefaultConfig() &&  TEmptyView.getConfig().layoutParams != null) {
+                emptyView.setLayoutParams(TEmptyView.getConfig().layoutParams);
             }
         }
 
@@ -186,17 +237,17 @@ public class TViewUtil {
 
 
         public EmptyViewBuilder setShowIcon(boolean mShowIcon) {
-            this.mShowIcon = mShowIcon;
+            this.mShowIcon = mShowIcon ? ShowType.SHOW : ShowType.HIDE;
             return this;
         }
 
         public EmptyViewBuilder setShowText(boolean showText) {
-            this.mShowText = showText;
+            this.mShowText = showText ? ShowType.SHOW : ShowType.HIDE;
             return this;
         }
 
         public EmptyViewBuilder setShowButton(boolean showButton) {
-            this.mShowButton = showButton;
+            this.mShowButton = showButton ? ShowType.SHOW : ShowType.HIDE;
             return this;
         }
 

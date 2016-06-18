@@ -27,6 +27,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.barryzhang.temptyview.TEmptyView;
 import com.barryzhang.temptyview.TViewUtil;
 
 import java.io.InterruptedIOException;
@@ -54,6 +55,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TViewUtil.EmptyViewBuilder emptyViewConfig = TViewUtil.EmptyViewBuilder.getInstance(this)
+                .setShowText(true)
+                .setEmptyText("没有数据")
+                .setShowButton(false)
+                .setShowIcon(true);
+        TEmptyView.init(emptyViewConfig);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         View.OnClickListener action = new View.OnClickListener() {
