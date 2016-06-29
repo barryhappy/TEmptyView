@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
         TViewUtil.EmptyViewBuilder emptyViewConfig = TViewUtil.EmptyViewBuilder.getInstance(getApplicationContext())
                 .setShowText(true)
-                .setEmptyText("没有数据")
+                .setEmptyText("NO DATA")
                 .setShowButton(false)
                 .setShowIcon(true);
         TEmptyView.init(emptyViewConfig);

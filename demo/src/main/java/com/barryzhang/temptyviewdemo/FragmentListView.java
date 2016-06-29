@@ -68,18 +68,18 @@ public class FragmentListView extends BaseFragment {
 
             TViewUtil.EmptyViewBuilder.getInstance(getContext())
                     .setEmptyTextSize(14)
-                    .setIconDrawable(getResources().getDrawable(R.drawable.airplane))
+                    .setIconDrawable(getResources().getDrawable(R.drawable.ic_menu_gallery))
                     .bindView(listView);
         }else if(type == 3){
 
             TViewUtil.EmptyViewBuilder.getInstance(getContext())
-                    .setEmptyTextSize(14)
+                    .setEmptyText("Nothing here~")
+                    .setEmptyTextSize(12)
                     .setEmptyTextColor(Color.GRAY)
-                    .setEmptyText("This is a empty view in fragment 3")
-                    .setIconSrc(R.drawable.ic_menu_gallery)
+                    .setIconSrc(R.drawable.airplane)
                     .setShowText(true)
                     .setShowButton(true)
-                    .setActionText("Click me")
+                    .setActionText("Click")
                     .setAction(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
