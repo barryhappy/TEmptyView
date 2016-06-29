@@ -6,7 +6,7 @@ ext {
 
     publishedGroupId = 'com.barryzhang'
     libraryName = 'TEmptyVIew'
-    artifact = 'temptyview_lib'
+    artifact = 'temptyview'
 
     libraryDescription = 'Just a Wheel——A easy way to setEmptyView to ListView、GridView or RecyclerView etc..'
 

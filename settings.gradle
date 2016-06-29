@@ -1,1 +1,1 @@
-include ':demo', ':temptyview_lib'
+include ':demo', ':temptyview'
