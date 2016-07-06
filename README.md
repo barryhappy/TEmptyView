@@ -3,7 +3,7 @@ TEmptyView是一个小轮子，希望能够更简单地设置EmptyView，免除�
 支持AdapterView(ListView/GridView等)、RecyclerView。
 ## 导入 
 ```groovy
-	compile 'com.barryzhang.temptyview:0.0.1' 
+	compile 'com.barryzhang:temptyview:0.0.1' 
 ```
 
 ## 使用 
@@ -17,6 +17,7 @@ TEmptyView.init(TViewUtil.EmptyViewBuilder.getInstance(context)
        .setShowText(true)
        .setEmptyText("NO DATA")
        .setShowButton(false)
+       ...
        .setShowIcon(true));
 ```
 
@@ -65,6 +66,9 @@ TViewUtil.EmptyViewBuilder.getInstance(this)
 #### 2.小提示：
 初始化(TEmptyView.init)的时机——建议放到Application的onCreate方法中，不过实际上只需要保证在第一次设置emptyView前进行初始化即可。如果在其他地方初始化，记得传入的context值最好`不要使用Activity`，否则有可能会引起内存泄漏。
 
-### 仍在开发中……以上所有内容都随时可能会变 
+
+
+
+*仍在开发中……以上所有内容都随时可能会变 (笑)*  
 
 
