@@ -1,16 +1,17 @@
-# TEmptyView
-TEmptyView是一个小轮子，希望能够更简单地设置EmptyView，免除每次设置emptyView都要写xml之苦。
-支持AdapterView(ListView/GridView等)、RecyclerView。
-## 导入 
+
+[中文说明在这里](./README.cn.md)
+# Features
+Just a Wheel—— A easier way to setEmptyView. Without having to write xml file every time. It supports AdapterView(ListView,GridView,etc) and RecyclerView. 
+
+## Dependency
 ```groovy
-	compile 'com.barryzhang:temptyview:0.0.1' 
+	compile 'com.barryzhang:temptyview:0.0.1'
 ```
 
-## 使用 
+## Usage
 
-### 一：初始化： 
-
-设置一些自定义的默认属性——这一步并不是必须的，如果没有进行初始化，下一步设置的时候会使用自带的默认属性。
+### I. Initialize
+initialize some custom attributes —— this step is not necessary, if you don't do it, it will use the default settings.
 
 ```java
 TEmptyView.init(TViewUtil.EmptyViewBuilder.getInstance(context)
@@ -21,16 +22,16 @@ TEmptyView.init(TViewUtil.EmptyViewBuilder.getInstance(context)
        .setShowIcon(true));
 ```
 
-### 二：设置emptyView
+### II. Set EmptyView
 
-#### 1.极简 
+#### 1.simple
 ```java
     TViewUtil.setEmptyView(listView)
 ```
 ![IMAGE1](./etc/demo1.png)
-#### 2.高级自定义
-TEmptyView的可视控件由三部分组成：ImageView、TextView、Button，可以对每个部分进行自定义  
 
+#### 2.custom 
+The view of TEmptyView is made of 3 parts: ImageView、TextView、Button. You can custom each of it.  
 ```java
 TViewUtil.EmptyViewBuilder.getInstance(this)
 	.setEmptyText("Nothing here~")
@@ -45,16 +46,16 @@ TViewUtil.EmptyViewBuilder.getInstance(this)
 		    Toast.makeText(getApplicationContext(),
 		            "Yes, clicked~",Toast.LENGTH_SHORT).show();
 		}
-	})	
+	})
 	.bindListView(listView);
 ```
 
 ![IMAGE2](./etc/demo2.png)
-## 注意事项
+
+## Other
 
 #### 1.RecyclerView
-用法基本AdapterView一样，但是需要先设置adapter。 
-
+Usage of RecyclerView is the same as AdapterView, but you must call `setAdapter` first.
 ```
 	recyclerView.setAdapter(adapter);
 	TViewUtil.EmptyViewBuilder.getInstance(getContext())
@@ -63,12 +64,11 @@ TViewUtil.EmptyViewBuilder.getInstance(this)
            .bindListView(recyclerView);
 ```
 
-#### 2.小提示：
-初始化(TEmptyView.init)的时机——建议放到Application的onCreate方法中，不过实际上只需要保证在第一次设置emptyView前进行初始化即可。如果在其他地方初始化，记得传入的context值最好`不要使用Activity`，否则有可能会引起内存泄漏。
+#### 2.Tip：
+
+If you din't call `TEmptyView.init(..)` in Application's onCreate method(This is recommend but not necessary), It is better to use Application as context instead of Activity, otherwise may easily cause memory leak.
 
 
-
-
-*仍在开发中……以上所有内容都随时可能会变 (笑)*  
+*Please excuse my poor English :)*
 
 
