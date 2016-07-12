@@ -1,6 +1,11 @@
+
+[English README is HERE](./README.md)
 # TEmptyView
+
 TEmptyView是一个小轮子，希望能够更简单地设置EmptyView，免除每次设置emptyView都要写xml之苦。
 支持AdapterView(ListView/GridView等)、RecyclerView。
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TEmptyView-green.svg?style=true)](https://android-arsenal.com/details/1/3886)
+
 ## 导入 
 ```groovy
 	compile 'com.barryzhang:temptyview:0.0.1' 
@@ -72,3 +77,7 @@ TViewUtil.EmptyViewBuilder.getInstance(this)
 *仍在开发中……以上所有内容都随时可能会变 (笑)*  
 
 
+许可 ![License](https://img.shields.io/hexpm/l/plug.svg)
+-----------------------------------------------------
+
+http://www.apache.org/licenses/LICENSE-2.0

@@ -1,7 +1,10 @@
 
 [中文说明在这里](./README.cn.md)
-# Features
+
+# TEmptyView
+
 Just a Wheel—— A easier way to setEmptyView. Without having to write xml file every time. It supports AdapterView(ListView,GridView,etc) and RecyclerView. 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TEmptyView-green.svg?style=true)](https://android-arsenal.com/details/1/3886)
 
 ## Dependency
 ```groovy
@@ -64,7 +67,7 @@ Usage of RecyclerView is the same as AdapterView, but you must call `setAdapter`
            .bindListView(recyclerView);
 ```
 
-#### 2.Tip：
+#### 2.Tips
 
 If you din't call `TEmptyView.init(..)` in Application's onCreate method(This is recommend but not necessary), It is better to use Application as context instead of Activity, otherwise may easily cause memory leak.
 
@@ -72,3 +75,20 @@ If you din't call `TEmptyView.init(..)` in Application's onCreate method(This is
 *Please excuse my poor English :)*
 
 
+
+License ![License](https://img.shields.io/hexpm/l/plug.svg)
+--------
+
+    Copyright 2016 Barry Zhang
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
