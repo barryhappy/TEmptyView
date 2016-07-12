@@ -2,9 +2,9 @@
 [中文说明在这里](./README.cn.md)
 
 # TEmptyView
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TEmptyView-green.svg?style=true)](https://android-arsenal.com/details/1/3886)
 
 Just a Wheel—— A easier way to setEmptyView. Without having to write xml file every time. It supports AdapterView(ListView,GridView,etc) and RecyclerView. 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TEmptyView-green.svg?style=true)](https://android-arsenal.com/details/1/3886)
 
 ## Dependency
 ```groovy
